@@ -21,5 +21,8 @@ for ticker in tickers:
     info = yf.Ticker(ticker).info
     name = info.get('longName')
     sector = info.get('sector')
+    outstanding = info.get('sharesOutstanding')
+    price = info.get('currentPrice')
+    capitalization = info.get('marketCap')
     #div = info.get('trailingAnnualDividendYield')
-    print(ticker, name, sector)
+    print(ticker, name, sector, outstanding, price, capitalization)
