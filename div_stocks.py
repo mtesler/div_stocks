@@ -1,4 +1,5 @@
 import pandas as pd
+import yfinance as yf
 
 # Web scraping list of S&P 500 Dividend Aristocrats
 
@@ -11,3 +12,14 @@ def load_data():
 
 
 df = load_data()
+
+# get stock info
+
+tickers = df['Ticker symbol']
+
+for ticker in tickers:
+    info = yf.Ticker(ticker).info
+    name = info.get('longName')
+    sector = info.get('sector')
+    #div = info.get('trailingAnnualDividendYield')
+    print(ticker, name, sector)
