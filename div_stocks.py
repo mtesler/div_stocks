@@ -24,5 +24,9 @@ for ticker in tickers:
     outstanding = info.get('sharesOutstanding')
     price = info.get('currentPrice')
     capitalization = info.get('marketCap')
+    eps = info.get('trailingEps')
+    # eps_growth_rate?
+    price_to_earning_ratio = round(price / eps, 2)
     #div = info.get('trailingAnnualDividendYield')
-    print(ticker, name, sector, outstanding, price, capitalization)
+    print(ticker, name, sector, outstanding, price,
+          capitalization, eps, price_to_earning_ratio)
