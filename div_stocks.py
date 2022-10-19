@@ -27,6 +27,7 @@ for ticker in tickers:
     eps = info.get('trailingEps')
     # eps_growth_rate?
     price_to_earning_ratio = round(price / eps, 2)
-    #div = info.get('trailingAnnualDividendYield')
+    div = info.get('trailingAnnualDividendRate')
+    div_yield = info.get('dividendYield')
     print(ticker, name, sector, outstanding, price,
-          capitalization, eps, price_to_earning_ratio)
+          capitalization, eps, price_to_earning_ratio, div, div_yield)
