@@ -44,5 +44,11 @@ for ticker in tickers:
         price_paid_for_share = price
     yield_on_cost = round(div / price_paid_for_share, 2)
     debt_to_equity = info.get('debtToEquity')
+    # credit rating?
+    peg = info.get('pegRatio')
+    # div growth streak?
+    number_of_analysis = info.get('numberOfAnalystOpinions')
+
     print(ticker, name, sector, outstanding, price,
-          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio, price_paid_for_share, yield_on_cost, debt_to_equity)
+          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio,
+          price_paid_for_share, yield_on_cost, debt_to_equity, peg, number_of_analysis)
