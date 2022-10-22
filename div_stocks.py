@@ -43,5 +43,6 @@ for ticker in tickers:
     else:
         price_paid_for_share = price
     yield_on_cost = round(div / price_paid_for_share, 2)
+    debt_to_equity = info.get('debtToEquity')
     print(ticker, name, sector, outstanding, price,
-          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio, price_paid_for_share)
+          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio, price_paid_for_share, yield_on_cost, debt_to_equity)
