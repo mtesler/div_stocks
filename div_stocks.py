@@ -17,6 +17,12 @@ df = load_data()
 
 tickers = df['Ticker symbol']
 
+# current portfolio
+details = {'ticker': ['AFL', 'BEN'],
+           'price_paid': [59.69, 22.21]}
+portfolio_df = pd.DataFrame(details, columns=['ticker', 'price_paid'])
+
+# prepare data set
 for ticker in tickers:
     info = yf.Ticker(ticker).info
     name = info.get('longName')
@@ -25,9 +31,17 @@ for ticker in tickers:
     price = info.get('currentPrice')
     capitalization = info.get('marketCap')
     eps = info.get('trailingEps')
-    # eps_growth_rate?
+    # eps growth rate?
     price_to_earning_ratio = round(price / eps, 2)
     div = info.get('trailingAnnualDividendRate')
     div_yield = info.get('dividendYield')
+    # div growth rate?
+    div_payout_ratio = info.get('payoutRatio')
+    if ticker in portfolio_df.values:
+        price_paid_for_share = portfolio_df.loc[portfolio_df['ticker']
+                                                == ticker, 'price_paid'].iloc[0]
+    else:
+        price_paid_for_share = price
+    yield_on_cost = round(div / price_paid_for_share, 2)
     print(ticker, name, sector, outstanding, price,
-          capitalization, eps, price_to_earning_ratio, div, div_yield)
+          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio, price_paid_for_share)
