@@ -32,7 +32,10 @@ for ticker in tickers:
     capitalization = info.get('marketCap')
     eps = info.get('trailingEps')
     # eps growth rate?
-    price_to_earning_ratio = round(price / eps, 2)
+    if price is None or eps is None:
+        price_to_earning_ratio = None
+    else:
+        price_to_earning_ratio = round(price / eps, 2)
     div = info.get('trailingAnnualDividendRate')
     div_yield = info.get('dividendYield')
     # div growth rate?
