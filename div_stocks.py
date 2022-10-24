@@ -45,7 +45,10 @@ for ticker in tickers:
                                                 == ticker, 'price_paid'].iloc[0]
     else:
         price_paid_for_share = price
-    yield_on_cost = round(div / price_paid_for_share, 2)
+    if div is None or price_paid_for_share is None:
+        yield_on_cost = None
+    else:
+        yield_on_cost = round(div / price_paid_for_share, 2)
     debt_to_equity = info.get('debtToEquity')
     # credit rating?
     peg = info.get('pegRatio')
