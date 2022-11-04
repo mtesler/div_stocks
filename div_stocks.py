@@ -1,5 +1,6 @@
 import pandas as pd
 import yfinance as yf
+import csv
 
 # Web scraping list of S&P 500 Dividend Aristocrats
 
@@ -23,6 +24,10 @@ details = {'ticker': ['AFL', 'BEN'],
 portfolio_df = pd.DataFrame(details, columns=['ticker', 'price_paid'])
 
 # prepare data set
+data = pd.DataFrame(columns=['ticker', 'name', 'sector', 'outstanding', 'price',
+                             'capitalization', 'eps', 'price_to_earning_ratio', 'div', 'div_yield', 'div_payout_ratio',
+                             'price_paid_for_share', 'yield_on_cost', 'debt_to_equity', 'peg', 'number_of_analysis'])
+
 for ticker in tickers:
     info = yf.Ticker(ticker).info
     name = info.get('longName')
@@ -55,6 +60,9 @@ for ticker in tickers:
     # div growth streak?
     number_of_analysis = info.get('numberOfAnalystOpinions')
 
-    print(ticker, name, sector, outstanding, price,
-          capitalization, eps, price_to_earning_ratio, div, div_yield, div_payout_ratio,
-          price_paid_for_share, yield_on_cost, debt_to_equity, peg, number_of_analysis)
+    data = data.append({'ticker': ticker, 'name': name, 'sector': sector, 'outstanding': outstanding, 'price': price,
+                        'capitalization': capitalization, 'eps': eps, 'price_to_earning_ratio': price_to_earning_ratio, 'div': div, 'div_yield': div_yield, 'div_payout_ratio': div_payout_ratio,
+                        'price_paid_for_share': price_paid_for_share, 'yield_on_cost': yield_on_cost, 'debt_to_equity': debt_to_equity, 'peg': peg, 'number_of_analysis': number_of_analysis}, ignore_index=True)
+
+# export dataset to CSV file
+data.to_csv('data.csv')
