@@ -18,9 +18,8 @@ df = load_data()
 tickers = df['Ticker symbol']
 
 # current portfolio
-details = {'ticker': ['AFL', 'BEN'],
-           'price_paid': [59.69, 22.21]}
-portfolio_df = pd.DataFrame(details, columns=['ticker', 'price_paid'])
+details = pd.read_excel('Portfolio.xlsx', sheet_name='Portfolio')
+portfolio_df = pd.DataFrame(details)
 
 # prepare data set
 data = pd.DataFrame(columns=['ticker', 'name', 'sector', 'outstanding', 'price',
